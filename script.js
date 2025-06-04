@@ -5,6 +5,8 @@ class BugBountyManual {
         this.currentChapter = 'chapter1';
         this.sidebar = document.querySelector('.sidebar');
         this.sidebarToggle = document.getElementById('sidebarToggle');
+        this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        this.mobileOverlay = document.getElementById('mobileOverlay');
         this.navLinks = document.querySelectorAll('.nav-link');
         this.chapters = document.querySelectorAll('.chapter');
         
@@ -16,13 +18,40 @@ class BugBountyManual {
         this.setupKeyboardNavigation();
         this.addScrollProgress();
         this.addSmoothAnimations();
+        this.handleInitialLayout();
+    }
+
+    handleInitialLayout() {
+        // Ensure proper initial state based on screen size
+        if (window.innerWidth <= 1024) {
+            this.closeSidebar();
+        } else {
+            // Desktop view - ensure mobile overlay is hidden
+            if (this.mobileOverlay) {
+                this.mobileOverlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
     }
 
     setupEventListeners() {
-        // Sidebar toggle for mobile
+        // Sidebar toggle for mobile (both buttons)
         if (this.sidebarToggle) {
             this.sidebarToggle.addEventListener('click', () => {
                 this.toggleSidebar();
+            });
+        }
+
+        if (this.mobileMenuBtn) {
+            this.mobileMenuBtn.addEventListener('click', () => {
+                this.toggleSidebar();
+            });
+        }
+
+        // Mobile overlay click to close
+        if (this.mobileOverlay) {
+            this.mobileOverlay.addEventListener('click', () => {
+                this.closeSidebar();
             });
         }
 
@@ -39,18 +68,24 @@ class BugBountyManual {
         document.addEventListener('click', (e) => {
             if (window.innerWidth <= 1024 && 
                 !this.sidebar.contains(e.target) && 
-                !this.sidebarToggle.contains(e.target) &&
+                !this.sidebarToggle?.contains(e.target) &&
+                !this.mobileMenuBtn?.contains(e.target) &&
                 this.sidebar.classList.contains('open')) {
-                this.sidebar.classList.remove('open');
+                this.closeSidebar();
             }
         });
 
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 1024) {
-                this.sidebar.classList.remove('open');
+                this.closeSidebar();
+                // Ensure desktop view is properly set
+                document.body.style.overflow = '';
             }
         });
+
+        // Add touch events for better mobile interaction
+        this.addTouchEvents();
 
         // Add click handlers for asset cards and platform cards
         this.addCardInteractions();
@@ -60,7 +95,7 @@ class BugBountyManual {
         document.addEventListener('keydown', (e) => {
             // Escape key to close sidebar on mobile
             if (e.key === 'Escape' && this.sidebar.classList.contains('open')) {
-                this.sidebar.classList.remove('open');
+                this.closeSidebar();
             }
 
             // Arrow keys for chapter navigation
@@ -73,6 +108,38 @@ class BugBountyManual {
 
     toggleSidebar() {
         this.sidebar.classList.toggle('open');
+        if (this.mobileOverlay) {
+            this.mobileOverlay.classList.toggle('active');
+        }
+        
+        // Update mobile menu button icon
+        if (this.mobileMenuBtn) {
+            const icon = this.mobileMenuBtn.querySelector('i');
+            if (this.sidebar.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        }
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = this.sidebar.classList.contains('open') ? 'hidden' : '';
+    }
+
+    closeSidebar() {
+        this.sidebar.classList.remove('open');
+        if (this.mobileOverlay) {
+            this.mobileOverlay.classList.remove('active');
+        }
+        
+        // Reset mobile menu button icon
+        if (this.mobileMenuBtn) {
+            const icon = this.mobileMenuBtn.querySelector('i');
+            icon.className = 'fas fa-bars';
+        }
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
     }
 
     showChapter(chapterId) {
@@ -93,7 +160,7 @@ class BugBountyManual {
 
         // Close sidebar on mobile
         if (window.innerWidth <= 1024) {
-            this.sidebar.classList.remove('open');
+            this.closeSidebar();
         }
 
         // Scroll to top
@@ -180,6 +247,38 @@ class BugBountyManual {
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+    }
+
+    addTouchEvents() {
+        // Add touch gestures for mobile navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+        }, { passive: true });
+        
+        this.handleSwipe = () => {
+            const swipeThreshold = 100;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            // Only handle swipes when sidebar is closed and we're on mobile
+            if (window.innerWidth <= 1024 && !this.sidebar.classList.contains('open')) {
+                // Swipe right to open sidebar
+                if (swipeDistance > swipeThreshold && touchStartX < 50) {
+                    this.toggleSidebar();
+                }
+            }
+            // Close sidebar with swipe left
+            else if (this.sidebar.classList.contains('open') && swipeDistance < -swipeThreshold) {
+                this.closeSidebar();
+            }
+        };
     }
 
     addCardInteractions() {
