@@ -19,6 +19,7 @@ class BugBountyManual {
         this.addScrollProgress();
         this.addSmoothAnimations();
         this.handleInitialLayout();
+        this.optimizeMobilePerformance();
     }
 
     handleInitialLayout() {
@@ -227,8 +228,8 @@ class BugBountyManual {
     addSmoothAnimations() {
         // Intersection Observer for fade-in animations
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.05,
+            rootMargin: '50px 0px 50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -247,6 +248,16 @@ class BugBountyManual {
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+
+        // Fallback: Make sections visible after a delay if intersection observer fails
+        setTimeout(() => {
+            document.querySelectorAll('.content-section').forEach(section => {
+                if (section.style.opacity === '0') {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }, 1000);
     }
 
     addTouchEvents() {
@@ -539,6 +550,151 @@ class BugBountyManual {
                 activeChapter.style.opacity = '1';
                 activeChapter.style.transform = 'translateY(0)';
             }, 100);
+        }
+    }
+
+    optimizeMobilePerformance() {
+        // Only apply optimizations on mobile devices
+        if (window.innerWidth <= 768) {
+            this.setupMobileLazyLoading();
+            this.optimizeHeavySections();
+            this.debounceScrollEvents();
+        }
+    }
+
+    setupMobileLazyLoading() {
+        // Lazy load heavy sections marked with data-mobile-lazy
+        const lazyElements = document.querySelectorAll('[data-mobile-lazy="true"]');
+        
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('mobile-loaded');
+                        this.optimizeElementForMobile(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '100px 0px'
+            });
+
+            lazyElements.forEach(element => observer.observe(element));
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            lazyElements.forEach(element => {
+                element.classList.add('mobile-loaded');
+                this.optimizeElementForMobile(element);
+            });
+        }
+    }
+
+    optimizeHeavySections() {
+        // Optimize sections marked with data-mobile-optimize
+        const heavySections = document.querySelectorAll('[data-mobile-optimize="true"]');
+        
+        heavySections.forEach(section => {
+            // Reduce complexity by showing fewer items initially on mobile
+            const payloadItems = section.querySelectorAll('.payload-item');
+            if (payloadItems.length > 20) {
+                // Show only first 15 items on mobile, add "Show More" button
+                for (let i = 15; i < payloadItems.length; i++) {
+                    payloadItems[i].style.display = 'none';
+                    payloadItems[i].classList.add('mobile-hidden');
+                }
+
+                // Add "Show More" button if not already present
+                if (!section.querySelector('.mobile-show-more')) {
+                    const showMoreBtn = document.createElement('button');
+                    showMoreBtn.className = 'mobile-show-more nav-btn';
+                    showMoreBtn.textContent = `Show ${payloadItems.length - 15} More Payloads`;
+                    showMoreBtn.style.cssText = `
+                        margin: 1rem auto;
+                        display: block;
+                        background: var(--primary-color);
+                        color: white;
+                        border: none;
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        font-size: 0.875rem;
+                        transition: all 0.3s ease;
+                    `;
+
+                    showMoreBtn.addEventListener('click', () => {
+                        const hiddenItems = section.querySelectorAll('.mobile-hidden');
+                        hiddenItems.forEach(item => {
+                            item.style.display = '';
+                            item.classList.remove('mobile-hidden');
+                        });
+                        showMoreBtn.remove();
+                    });
+
+                    section.appendChild(showMoreBtn);
+                }
+            }
+        });
+    }
+
+    optimizeElementForMobile(element) {
+        // Apply mobile-specific optimizations to loaded elements
+        const codeBlocks = element.querySelectorAll('code');
+        codeBlocks.forEach(code => {
+            // Limit code block height on mobile to prevent performance issues
+            if (code.textContent.length > 200) {
+                code.style.maxHeight = '100px';
+                code.style.overflow = 'hidden';
+                code.style.position = 'relative';
+                
+                // Add expand button for long code blocks
+                const expandBtn = document.createElement('span');
+                expandBtn.textContent = '...click to expand';
+                expandBtn.style.cssText = `
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 0.25rem 0.5rem;
+                    font-size: 0.75rem;
+                    cursor: pointer;
+                    border-radius: 0.25rem;
+                `;
+
+                expandBtn.addEventListener('click', () => {
+                    code.style.maxHeight = 'none';
+                    expandBtn.remove();
+                });
+
+                code.appendChild(expandBtn);
+            }
+        });
+    }
+
+    debounceScrollEvents() {
+        let scrollTimeout;
+        const originalScrollHandler = window.onscroll;
+        
+        window.onscroll = () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (originalScrollHandler) originalScrollHandler();
+                this.updateScrollProgress();
+            }, 16); // ~60fps
+        };
+    }
+
+    updateScrollProgress() {
+        // Update scroll progress more efficiently on mobile
+        if (window.innerWidth <= 768) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / documentHeight) * 100;
+            
+            const progressBar = document.querySelector('.scroll-progress');
+            if (progressBar) {
+                progressBar.style.transform = `scaleX(${progress / 100})`;
+            }
         }
     }
 }
