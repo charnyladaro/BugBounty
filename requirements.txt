@@ -1,0 +1,12 @@
+# Bug Bounty TUI - Python Dependencies
+
+# Core dependencies
+rich>=13.0.0
+textual>=0.40.0
+
+# Development dependencies (optional)
+# Uncomment these if you're developing/contributing:
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0
+# pytest>=7.0.0
