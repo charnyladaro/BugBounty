@@ -28,6 +28,10 @@ GO_TOOLS=(
     "amass:github.com/owasp-amass/amass/v4/...@master"
 )
 
+RUST_TOOLS=(
+    "feroxbuster"
+)
+
 PYTHON_TOOLS=(
     "sqlmap"
 )
@@ -55,6 +59,18 @@ for tool_info in "${GO_TOOLS[@]}"; do
     else
         echo "  [✗] $tool_name - missing"
         missing_tools+=("$tool_name")
+    fi
+done
+
+echo ""
+echo "[*] Checking Rust tools..."
+
+for tool in "${RUST_TOOLS[@]}"; do
+    if command -v "$tool" &> /dev/null; then
+        echo "  [✓] $tool - installed"
+    else
+        echo "  [✗] $tool - missing"
+        missing_tools+=("$tool")
     fi
 done
 
@@ -119,6 +135,22 @@ for tool in "${PYTHON_TOOLS[@]}"; do
         if [ "$tool" = "sqlmap" ]; then
             sudo apt-get install -y sqlmap 2>&1 | tail -5
         fi
+    fi
+done
+
+# Install Rust tools
+echo ""
+echo "[*] Checking for Rust/Cargo..."
+if ! command -v cargo &> /dev/null; then
+    echo "[*] Rust not found. Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
+fi
+
+for tool in "${RUST_TOOLS[@]}"; do
+    if ! command -v "$tool" &> /dev/null; then
+        echo "[*] Installing $tool via cargo..."
+        cargo install "$tool" 2>&1 | tail -5
     fi
 done
 
