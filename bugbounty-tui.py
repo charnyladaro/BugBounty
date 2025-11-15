@@ -1213,22 +1213,20 @@ class BugBountyTUI(App):
                 
                 # Scan selection
                 yield Static("[bold cyan]⚙️  SCAN MODULES[/]", classes="panel-title")
-                
-                with Horizontal():
-                    with Vertical():
-                        yield Checkbox("🔍 Subdomain Enumeration", value=True, id="scan_subdomains")
-                        yield Checkbox("🔓 Port Scanning", value=True, id="scan_ports")
-                        yield Checkbox("📁 Directory Fuzzing (Gobuster)", value=True, id="scan_dirs")
-                        yield Checkbox("🦀 Advanced Discovery (Feroxbuster)", value=False, id="scan_ferox")
-                        yield Checkbox("🔧 Technology Detection", value=True, id="scan_tech")
-                        yield Checkbox("🔒 SSL/TLS Analysis", value=True, id="scan_ssl")
-                    
-                    with Vertical():
-                        yield Checkbox("⚠️  Nikto Vulnerability Scan", value=False, id="scan_nikto")
-                        yield Checkbox("💉 SQL Injection", value=False, id="scan_sql")
-                        yield Checkbox("⚡ XSS (Quick Scan)", value=False, id="scan_xss")
-                        yield Checkbox("🕷️  Web Spider", value=False, id="scan_spider")
-                        yield Checkbox("⏪ Wayback URLs", value=False, id="scan_wayback")
+
+                # Stack all scan checkboxes vertically so they fit in one box
+                with Vertical(id="scan-selection"):
+                    yield Checkbox("🔍 Subdomain Enumeration", value=True, id="scan_subdomains")
+                    yield Checkbox("🔓 Port Scanning", value=True, id="scan_ports")
+                    yield Checkbox("📁 Directory Fuzzing (Gobuster)", value=True, id="scan_dirs")
+                    yield Checkbox("🦀 Advanced Discovery (Feroxbuster)", value=False, id="scan_ferox")
+                    yield Checkbox("🔧 Technology Detection", value=True, id="scan_tech")
+                    yield Checkbox("🔒 SSL/TLS Analysis", value=True, id="scan_ssl")
+                    yield Checkbox("⚠️  Nikto Vulnerability Scan", value=False, id="scan_nikto")
+                    yield Checkbox("💉 SQL Injection", value=False, id="scan_sql")
+                    yield Checkbox("⚡ XSS (Quick Scan)", value=False, id="scan_xss")
+                    yield Checkbox("🕷️  Web Spider", value=False, id="scan_spider")
+                    yield Checkbox("⏪ Wayback URLs", value=False, id="scan_wayback")
                 
                 # Control buttons
                 yield Static("[bold cyan]🎮 CONTROL CENTER[/]", classes="panel-title")
